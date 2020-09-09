@@ -1,4 +1,4 @@
-# [TypeScript Example](https://www.typescriptlang.org/)
+# RN Circuler Slider
 
 <p>
   <!-- iOS -->
@@ -9,27 +9,15 @@
   <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
 </p>
 
-```sh
-npx create-react-native-app -t with-typescript
-```
+## Screenshot
 
-
-TypeScript is a superset of JavaScript which gives you static types and powerful tooling in Visual Studio Code including autocompletion and useful inline warnings for type errors.
+<img src="/screenshot.png" width="200" />
 
 ## 🚀 How to use
 
-#### Creating a new project
-
 - Install the CLI: `npm i -g expo-cli`
-- Create a project: `expo init --template expo-template-blank-typescript`
-- `cd` into the project
-
-### Adding TypeScript to existing projects
-
-- Copy the `tsconfig.json` from this repo, or new typescript template
-- Add typescript dependencies: `yarn add --dev @types/react @types/react-native @types/react-dom typescript`
-- Rename files tpo TypeScript, `.tsx` for React components and `.ts` for plain typescript files
-
-## 📝 Notes
-
-- [Expo TypeScript guide](https://docs.expo.io/versions/latest/guides/typescript/)
+- Clone the project: `git clone https://github.com/fayeed/rn-circular-slider.git`
+- Install dependencies: `npm i`
+- Run project
+  - android: `yarn android` or `npm i android`
+  - ios: `yarn ios` or `npm i ios`
