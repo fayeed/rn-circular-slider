@@ -28,7 +28,27 @@ export default function App() {
     <View style={styles.container}>
       <View
         style={{
-          height: 400,
+          marginTop: 60,
+          height: 20,
+          width,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Text
+          style={{
+            color: "#FFD080",
+            fontWeight: "bold",
+            fontSize: 18,
+            letterSpacing: 2,
+          }}
+        >
+          Frankie Marshal
+        </Text>
+      </View>
+      <View
+        style={{
+          height: 360,
           width: width,
           alignItems: "center",
           justifyContent: "center",
@@ -40,14 +60,15 @@ export default function App() {
           min={0}
           max={359}
           xCenter={width / 2}
-          yCenter={400 / 2}
+          yCenter={440 / 2}
           value={active}
           onValueChange={(val) => {
+            const index =
+              Math.round(val / 12.85) >= 28 ? 27 : Math.round(val / 12.85);
             ref.current.scrollToIndex({
-              index: Math.round(val / 12.85),
+              index,
               animated: true,
             });
-            console.log(val / 12.85);
             setActive(val);
           }}
           sliderWidth={18}
@@ -68,8 +89,9 @@ export default function App() {
         onScroll={onScroll}
         initialScrollIndex={currentDate}
         keyExtractor={(item, i) => `${item.month}-${i}`}
+        onScrollToIndexFailed={() => {}}
         contentContainerStyle={{
-          height: 500.0,
+          height: 460.0,
           alignItems: "center",
           overflow: "visible",
         }}
@@ -83,7 +105,7 @@ export default function App() {
                 position: "relative",
                 opacity: d === index ? 1 : 0.1,
                 marginHorizontal: width * 0.1,
-                height: 300.0,
+                height: 260.0,
                 borderRadius: 10,
                 backgroundColor:
                   d === index
