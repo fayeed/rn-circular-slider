@@ -41,8 +41,7 @@ export default function Slider({
   value,
   onValueChange,
 }: SliderProps) {
-  const date = new Date(Date.now());
-  const currentDate = date.getDate() - 1;
+  const currentDate = 7;
   const [angle, setAngle] = useState<number>(value * 12.85);
   const responder = useRef(
     PanResponder.create({
@@ -66,6 +65,7 @@ export default function Slider({
           onValueChange(max);
         } else {
           const an = Math.round(a / 12.85) * 12.85;
+
           setAngle(an >= max ? 360 : an);
           onValueChange(an >= max ? 360 : an);
         }
@@ -75,22 +75,24 @@ export default function Slider({
 
   const cartesianToPolar = (x: number, y: number) => {
     const val = dailRadius + handleRadius;
+    const a = currentDate * 12.85 + 90;
 
     if (x === 0) {
       return y > val ? 0 : 180;
     } else if (y === 0) {
-      return x > val ? 0 : 270;
+      return x > val ? a : y > val ? a * 2 : 0;
     } else {
       return (
-        Math.round((Math.atan((y - val) / (x - val)) * 180) / Math.PI) +
-        (x > val ? 90 : 270)
+        Math.round(Math.atan((y - val) / (x - val)) * (180.0 / Math.PI)) +
+        (x > val ? a : y > val ? a * 2 : 0)
       );
     }
   };
 
   const polarToCartesian = (angle: number) => {
     const val = dailRadius + handleRadius;
-    const newAngle = ((angle - 90) * Math.PI) / 180.0;
+    const a = currentDate * 12.85 + 90;
+    const newAngle = ((angle - a) * Math.PI) / 180.0;
 
     const x = val + dailRadius * Math.cos(newAngle);
     const y = val + dailRadius * Math.sin(newAngle);
@@ -101,8 +103,6 @@ export default function Slider({
   const start = polarToCartesian(0);
   const end = polarToCartesian(angle);
   const width = (dailRadius + handleRadius) * 2;
-
-  console.log(Math.round(angle / 12.85));
 
   return (
     <Svg width={width} height={width}>
@@ -116,12 +116,13 @@ export default function Slider({
         r={dailRadius + sliderWidth / 2 - 1}
         cx={width / 2}
         cy={width / 2}
-        strokeWidth={1}
+        strokeWidth={2}
         stroke={sliderStrokeColor}
       />
       <Path
         stroke={sliderColor}
         strokeWidth={sliderWidth}
+        strokeLinecap="round"
         fill="none"
         d={`M${start.x} ${start.y} A ${dailRadius} ${dailRadius} 0 ${
           angle > 180 ? 1 : 0

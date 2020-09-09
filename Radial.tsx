@@ -13,14 +13,13 @@ export default function Radial({
   stroke = "#000",
   value = 0,
 }: RadialPorps) {
-  const textRadius = radius;
+  const textRadius = radius - 1;
 
   const arr = useMemo(() => new Array(28).fill(0), []);
 
   const width = (radius + 15) * 2;
 
-  const date = new Date(Date.now());
-  const currentDate = date.getDate() - 1;
+  const currentDate = 7;
 
   return (
     <G x={width / 2} y={width / 2}>
@@ -31,8 +30,14 @@ export default function Radial({
             fill={value >= i ? "#fff" : "#000"}
             fontSize="10"
             textAnchor="middle"
-            x={textRadius * Math.cos(((2 * Math.PI) / 28) * i - Math.PI / 2)}
-            y={textRadius * Math.sin(((2 * Math.PI) / 28) * i - Math.PI / 2)}
+            x={
+              textRadius *
+              Math.cos(((2 * Math.PI) / 28) * (i - currentDate) - Math.PI / 2)
+            }
+            y={
+              textRadius *
+              Math.sin(((2 * Math.PI) / 28) * (i - currentDate) - Math.PI / 2)
+            }
           >
             {i + 1}
           </Text>
@@ -40,13 +45,20 @@ export default function Radial({
         {dates.map((e, i) => (
           <Circle
             key={`cir-${i}`}
-            r={8}
-            cx={textRadius * Math.cos(((2 * Math.PI) / 28) * i - Math.PI / 2)}
+            r={12}
+            cx={
+              (textRadius + 1) *
+              Math.cos(((2 * Math.PI) / 28) * (i - currentDate) - Math.PI / 2)
+            }
             cy={
-              textRadius * Math.sin(((2 * Math.PI) / 28) * i - Math.PI / 2) - 4
+              (textRadius + 1) *
+                Math.sin(
+                  ((2 * Math.PI) / 28) * (i - currentDate) - Math.PI / 2
+                ) -
+              4
             }
             strokeWidth={2}
-            stroke={e.mood ? "#000" : "transparent"}
+            stroke={e.mood ? "red" : "transparent"}
           />
         ))}
       </G>
