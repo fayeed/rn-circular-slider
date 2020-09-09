@@ -28,39 +28,39 @@ export default function App() {
     <View style={styles.container}>
       <View
         style={{
-          marginTop: 60,
-          height: 20,
-          width,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Text
-          style={{
-            color: "#FFD080",
-            fontWeight: "bold",
-            fontSize: 18,
-            letterSpacing: 2,
-          }}
-        >
-          Frankie Marshal
-        </Text>
-      </View>
-      <View
-        style={{
           height: 360,
           width: width,
           alignItems: "center",
           justifyContent: "center",
         }}
       >
+        <View
+          style={{
+            marginTop: 60,
+            height: 20,
+            width,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text
+            style={{
+              color: "#FFD080",
+              fontWeight: "bold",
+              fontSize: 18,
+              letterSpacing: 2,
+            }}
+          >
+            Frankie Marshal
+          </Text>
+        </View>
         <Slider
           handleRadius={15}
           dailRadius={130}
           min={0}
           max={359}
           xCenter={width / 2}
-          yCenter={440 / 2}
+          yCenter={420 / 2}
           value={active}
           onValueChange={(val) => {
             const index =
@@ -91,7 +91,7 @@ export default function App() {
         keyExtractor={(item, i) => `${item.month}-${i}`}
         onScrollToIndexFailed={() => {}}
         contentContainerStyle={{
-          height: 460.0,
+          height: 500.0,
           alignItems: "center",
           overflow: "visible",
         }}
